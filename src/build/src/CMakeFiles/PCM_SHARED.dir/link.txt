@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -Wno-unknown-pragmas -fPIC -Wextra -DPCM_USE_PERF -Wall -O3 -D_FORTIFY_SOURCE=1  -shared -Wl,-soname,libpcm.so -o ../lib/libpcm.so CMakeFiles/PCM_SHARED.dir/pcm-core.cpp.o libPCM_STATIC_SILENT.a -pthread 

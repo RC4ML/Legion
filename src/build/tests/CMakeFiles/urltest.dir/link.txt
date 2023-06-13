@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wno-unknown-pragmas -fPIC -Wextra -DPCM_USE_PERF -Wall -O3 -D_FORTIFY_SOURCE=1   CMakeFiles/urltest.dir/urltest.cpp.o  -o ../bin/tests/urltest ../src/libpcm.a -pthread 

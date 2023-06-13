@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wno-unknown-pragmas -fPIC -Wextra -DPCM_USE_PERF -Wall -O3 -D_FORTIFY_SOURCE=1   -s CMakeFiles/daemon.dir/daemon/daemon.cpp.o CMakeFiles/daemon.dir/daemon/main.cpp.o  -o ../bin/pcm-daemon libpcm.a -pthread 

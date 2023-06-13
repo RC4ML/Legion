@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wno-unknown-pragmas -fPIC -Wextra -DPCM_USE_PERF -Wall -O3 -D_FORTIFY_SOURCE=1   CMakeFiles/c_example.dir/c_example.c.o  -o ../bin/examples/c_example -Wl,-rpath,/home/szc/pcm/build/lib: -ldl -pthread 

@@ -1,0 +1,4 @@
+# ninja log v5
+0	210	1677643311068024609	/home/sunjie/graph-learn/pytorch_extension/build/temp.linux-x86_64-cpython-38/helper_multiprocess.o	ad2294573275ff5b
+1	21869	1677643332698087299	/home/sunjie/graph-learn/pytorch_extension/build/temp.linux-x86_64-cpython-38/ipc_service.o	eea05e7f1fbae039
+0	41953	1677643352796438207	/home/sunjie/graph-learn/pytorch_extension/build/temp.linux-x86_64-cpython-38/ipc_cuda_kernel.o	786cceda4502e5b6

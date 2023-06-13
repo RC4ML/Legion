@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wno-unknown-pragmas -fPIC -Wextra -DPCM_USE_PERF -Wall -O3 -D_FORTIFY_SOURCE=1   -s CMakeFiles/pcm-pcicfg.dir/pcm-pcicfg.cpp.o  -o ../bin/pcm-pcicfg libpcm.a -pthread 
