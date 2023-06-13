@@ -1,4 +1,4 @@
-# Legion is a GPU-centric system for large-scale GNN training.
+# Legion is a GPU-centric System for Large-scale GNN Training.
 ## GPU-centric Execution
 Legion use multi-GPU to accelerate end-to-end GNN training procedure:
 
