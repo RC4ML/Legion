@@ -8,18 +8,6 @@ Legion use multi-GPU to accelerate end-to-end GNN training procedure:
 
 3, Model Training
 
-## Hierarchical Graph Storage
-
-**GPU Memory**, Unified Cache L1, store the hottest graph topology and features
-
-**CPU Memory**, Unified Cache L2, store graph topology and features with middle hotness
-
-**SSDs**, entire graph topology and features. Each SSD store a specific partition of graph data
-
-
-![legion-overview](https://github.com/RC4ML/Legion/assets/109936863/c06564d5-21ae-47b2-844e-2c29b234b6b2)
-
-
 ## Cite this work
 If you use it in your paper, please cite our work
 
