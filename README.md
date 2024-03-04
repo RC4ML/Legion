@@ -73,10 +73,11 @@ $ python3 legion_graphsage.py
 If you use it in your paper, please cite our work
 
 ```
-@article{sun2023legion,
-  title={Legion: Automatically Pushing the Envelope of Multi-GPU System for Billion-Scale GNN Training},
-  author={Sun, Jie and Su, Li and Shi, Zuocheng and Shen, Wenting and Wang, Zeke and Wang, Lei and Zhang, Jie and Li, Yong and Yu, Wenyuan and Zhou, Jingren and others},
-  journal={arXiv preprint arXiv:2305.16588},
-  year={2023}
+@inproceedings {sun2023legion,
+author = {Jie Sun and Li Su and Zuocheng Shi and Wenting Shen and Zeke Wang and Lei Wang and Jie Zhang and Yong Li and Wenyuan Yu and Jingren Zhou and Fei Wu},
+title = {Legion: Automatically Pushing the Envelope of Multi-GPU System for Billion-Scale GNN Training},
+booktitle = {2023 USENIX Annual Technical Conference (USENIX ATC 23)},
+year = {2023},
+pages = {165--179}
 }
 ```
