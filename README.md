@@ -12,6 +12,11 @@ Legion use multi-GPU to accelerate end-to-end GNN training procedure:
 Datasets are from OGB (https://ogb.stanford.edu/), Standford-snap (https://snap.stanford.edu/), and Webgraph (https://webgraph.di.unimi.it/).
 Here is an example of preparing datasets for Legion.
 
+### Uk-Union Datasets
+```
+1. $ bash prepare_datasets.sh
+```
+
 
 ## Cite this work
 If you use it in your paper, please cite our work
