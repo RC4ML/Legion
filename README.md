@@ -1,6 +1,6 @@
 # Legion is a GPU-initiated system for large-scale GNN training.
 ```
-$ git clone https://github.com/JIESUN233/Legion.git
+$ git clone https://github.com/RC4ML/Legion.git
 ```
 
 ## 1. Hardware 
