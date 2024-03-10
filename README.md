@@ -67,8 +67,7 @@ $ modprobe msr
 ### Step 2. Start Legion Server
 
 ```
-python sampling_server/python/legion_server.py
-
+$ python sampling_server/python/legion_server.py
 ```
 ### Step 3. Run Legion Training
 After Legion outputs "System is ready for serving", then start training by: 
