@@ -19,11 +19,11 @@ Kc means the number of groups in which GPUs connect each other. And Kg means the
 ## 2. Software 
 Legion's software is light-weighted and portable. Here we list some tested environment.
 
-1. Nvidia Driver Version: 515.43.04(DGX-A100, Siton, Siton2), 470.82.01(V100)
+1. Nvidia Driver Version: 515.43.04
 
-2. CUDA 11.3(DGX-A100, Siton), CUDA 10.1(DGX-V100), **CUDA 11.7(Siton2)**
+2. CUDA 11.7
 
-3. GCC/G++ 9.4.0+(DGX-A100, Siton, DGX-V100), GCC/G++ 7.5.0+(Siton2)
+3. GCC/G++ 9.4.0+
 
 4. OS: Ubuntu(other linux systems are ok)
 
@@ -31,11 +31,11 @@ Legion's software is light-weighted and portable. Here we list some tested envir
 ```
 $ wget https://download.opensuse.org/repositories/home:/opcm/xUbuntu_18.04/amd64/pcm_0-0+651.1_amd64.deb
 ```
-6. pytorch-cu113(DGX-A100, Siton), pytorch-cu101(DGX-V100), **pytorch-cu117(Siton2)**, torchmetrics
+6. pytorch-cu117, torchmetrics
 ```
 $ pip3 install torch-cu1xx
 ```
-7. dgl 0.9.1(DGX-A100, Siton, DGX-V100) **dgl 1.1.0(Siton2)**
+7. dgl 1.1.0
 ```
 $ pip3 install  dgl -f https://data.dgl.ai/wheels/cu1xx/repo.html
 ```
