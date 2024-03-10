@@ -11,18 +11,24 @@
 | Feature Storage | 960MB | 56GB | 65GB | 136GB | 400GB | 512GB |
 | Class Number | 47 | 2 | 2 | 2 | 2 | 2 |
 
+## Legion Format
+Take uk-union as an example
+Edge: uk-union/edge_src,  uk-union/edge_dst
+feature:  uk-union/features
+label: uk-union/labels
+partition:  uk-union/partition_8
 
 ## Customize your datasets
 ```
 cd dataset/
 ```
-创建webgraph依赖环境
+Creature enviroments for webgraph
 ```
 mkdir lib
 mv webgraph-3.5.2.jar lib/
 tar -xzvf webgraph-3.6.8-deps.tar.gz -C lib
 ```
-以webgraph网站中的uk-union数据集为例
+Take uk-union for example
 ```
 mkdir ukunion
 cd ukunion
@@ -33,34 +39,34 @@ wget http://data.law.di.unimi.it/webdata/uk-union-2006-06-2007-05/uk-union-2006-
 java -cp "lib/*" it.unimi.dsi.webgraph.ArcListASCIIGraph uk-union ukunion/ukunion-edgelist.txt
 
 mkdir xtrapulp_result
-# 生成legion格式的bin文件 以及 xtrapulp input格式
+# Generate legion-format bin including edge_src, edge_dst, and xtrapulp-format data for graph partitioning
 g++ gen_legion_xtrapulp_fomat.cpp -o gen_legion_xtrapulp_fomat
 ./gen_legion_xtrapulp_fomat ukunion ukunion-edgelist.txt
 
 ```
 
-# 2.配置xtrapulp环境
+# 2. Graph partitioning
+## Install MPI
 ```
 wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.0.tar.gz
 tar zxf openmpi-3.1.0.tar.gz
-
 cd openmpi-3.1.0
 sudo ./configure --prefix=/usr/local/openmp
 sudo make
 sudo make install
-
 MPI_HOME=/usr/local/openmpi
 export PATH=${MPI_HOME}/bin:$PATH
 export LD_LIBRARY_PATH=${MPI_HOME}/lib:$LD_LIBRARY_PATH
 export MANPATH=${MPI_HOME}/share/man:$MANPATH
 
-
+# or the instructions in the following
 # sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 # sudo apt-get install mpich libmpich-dev
 
 ```
-xtrapulp 分图，参考 https://github.com/luoxiaojian/xtrapulp
-以下是一个4进程 8分图的例子:
+## Partioning using xtrapulp
+refer to https://github.com/luoxiaojian/xtrapulp
+An example of using 4 processes to partition graph into 8 parts:
 ```
 git clone https://github.com/luoxiaojian/xtrapulp.git
 mv ukunion_xtraformat xtrapulp/
@@ -70,8 +76,7 @@ make libxtrapulp
 
 mpirun -n 4 ./xtrapulp ukunion_xtraformat 8 -v 1.03 -l
 
-# # ukunion_xtraformat.part.8的分图文件的转换为bin格式。第一个arg是生成后的文件名，第二个是该数据集的node数量
-cd ../
+# Convert ukunion_xtraformat.part.8 into legion-format input
 sudo g++ xtra_part_to_bin.cpp -o xtra_part_to_bin
 sudo ./xtra_part_to_bin xtrapulp/ukunion_xtraformat.parts.8 133633040
 ```
