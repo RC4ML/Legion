@@ -1,2 +1,0 @@
-ROOT=`pwd`
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOT:$ROOT/build/lib

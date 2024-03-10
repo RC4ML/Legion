@@ -1,0 +1,4 @@
+# ninja log v5
+1	204	1695296027231983238	/home/sunjie/gnn_ssd_experiment/Legion/training_backend/build/temp.linux-x86_64-3.10/helper_multiprocess.o	4bf1b8edbe848f43
+1	22539	1695296049540212082	/home/sunjie/gnn_ssd_experiment/Legion/training_backend/build/temp.linux-x86_64-3.10/ipc_service.o	cee80b9650466eea
+1	46374	1695296073380455933	/home/sunjie/gnn_ssd_experiment/Legion/training_backend/build/temp.linux-x86_64-3.10/ipc_cuda_kernel.o	7ed9e7a81d548bb

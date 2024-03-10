@@ -1,4 +1,0 @@
-# ninja log v5
-0	143	1683801377	/home/atc-artifacts-user/legion-atc-artifacts/pytorch_extension/build/temp.linux-x86_64-cpython-310/helper_multiprocess.o	9c6aef726ce9af26
-0	16149	1683801393	/home/atc-artifacts-user/legion-atc-artifacts/pytorch_extension/build/temp.linux-x86_64-cpython-310/ipc_service.o	a0cf5c61e8044b
-0	50804	1683801428	/home/atc-artifacts-user/legion-atc-artifacts/pytorch_extension/build/temp.linux-x86_64-cpython-310/ipc_cuda_kernel.o	abaae8796925ae58
