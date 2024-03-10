@@ -47,6 +47,7 @@ Datasets are from OGB (https://ogb.stanford.edu/), Standford-snap (https://snap.
 Here is an example of preparing datasets for Legion.
 
 ### Uk-Union Datasets
+Refer to README in dataset directory for more instructions
 ```
 $ bash prepare_datasets.sh
 ```
@@ -63,11 +64,18 @@ There are two steps to train a GNN model in Legion. In these steps, you need to 
 ```
 $ modprobe msr
 ```
-### Step 2. Run Legion
+### Step 2. Start Legion Server
 
 ```
-$ python3 legion_graphsage.py
+python sampling_server/python/legion_server.py
+
 ```
+### Step 3. Run Legion Training
+After Legion outputs "System is ready for serving", then start training by: 
+```
+$ python legion_graphsage.py
+```
+I will improve the running process for easier use.
 
 ## Cite this work
 If you use it in your paper, please cite our work
