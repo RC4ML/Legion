@@ -7,7 +7,7 @@
 #include "memorypool.cuh"
 #include "server.h"
 #include "server_imp.cuh"
-#include "monitor.cuh"
+// #include "monitor.cuh"
 #include "system_config.cuh"
 
 #include <thread>
@@ -51,8 +51,8 @@ public:
         }else{
             std::cout<<"In Disk Mode\n";
         }
-        monitor_ = new PCM_Monitor();
-        monitor_->Init();
+        // monitor_ = new PCM_Monitor();
+        // monitor_->Init();
         
         StorageManagement* storage_management = new StorageManagement();
         storage_management->Initialze(shard_count_, in_memory_mode);
@@ -151,7 +151,7 @@ private:
     FeatureStorage* feature_;
     UnifiedCache* cache_;
     IPCEnv* ipc_env_;
-    PCM_Monitor* monitor_;
+    // PCM_Monitor* monitor_;
 
     int shard_count_;
     int train_step_;

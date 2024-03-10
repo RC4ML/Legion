@@ -1,4 +1,4 @@
-default: shared
+default: bin
 
 HERE := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 ROOT := $(realpath $(HERE))
@@ -10,7 +10,6 @@ BIN_DIR := $(BUILD_DIR)/bin
 THIRD_PARTY_DIR := $(ROOT)/third_party
 PYTHON_DIR := $(ROOT)/python
 SRC_DIR = $(ROOT)/src
-SSD_DRIVER_DIR := /home/sunjie/bam/src/linux
 
 
 clean:
@@ -28,7 +27,7 @@ NVCXXFLAGS := -std=c++17 -arch=sm_60 -Xcompiler -Wall \
 			  -I $(SRC_DIR)/engine \
 			  -I $(SRC_DIR)/storage \
 			  -I $(SRC_DIR)/include/hashmap \
-			  -I $(SSD_DRIVER_DIR) -g
+			  -g
 
 
 CXX := g++
@@ -91,26 +90,3 @@ $(CORE_BUILT_DIR)/src/engine/%.o:$(CORE_DIR)/engine/%.cu $(CORE_H) $(CORE_CUH)
 
 core: $(CORE_OBJ)
 
-# cuda:
-# 	g++ -shared -o libhelper_multiprocess.so helper_multiprocess.cpp -I . -fPIC	
-# 	nvcc -o libgpu_kernel.so \
-# 	-std=c++17 -arch=sm_80 \
-# 	--extended-lambda -shared \
-# 	-Xcompiler -fPIC -lpthread \
-# 	--expt-relaxed-constexpr \
-# 	-I ./include -I ./pcm/src \
-# 	GPUCache.cu GPUMemoryPool.cu \
-# 	Kernels.cu CUDA_IPC_Service.cu \
-# 	GPU_Memory_Node_Storage.cu \
-# 	GPU_Memory_Graph_Storage.cu \
-# 	GPUGraphStore.cu Operator.cu \
-# 	Server.cu\
-# 	 -L . -lhelper_multiprocess  -L ./build/lib -lpcm
-
-# main:
-# 	g++ -I . main.cpp -fPIC -O2 \
-# 	-L . -L /usr/local/cuda/lib64 \
-# 	-lcudart  \
-# 	-o legion \
-# 	-lhelper_multiprocess -lgpu_kernel\
-# 	 -I ./src -L ./build/lib -lpcm
