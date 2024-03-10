@@ -81,3 +81,14 @@ year = {2023},
 pages = {165--179}
 }
 ```
+
+## Future Features of Legion
+We will open-source SSD support for Legion (Helios) in the future.
+```
+@article{sun2023helios,
+  title={Helios: An Efficient Out-of-core GNN Training System on Terabyte-scale Graphs with In-memory Performance},
+  author={Sun, Jie and Sun, Mo and Zhang, Zheng and Xie, Jun and Shi, Zuocheng and Yang, Zihan and Zhang, Jie and Wu, Fei and Wang, Zeke},
+  journal={arXiv preprint arXiv:2310.00837},
+  year={2023}
+}
+```
