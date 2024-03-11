@@ -38,7 +38,7 @@ def find_largest_fully_connected_group(G):
         
 def Run(args):
 
-    if args.dataset == "PR":
+    if args.dataset_name == "products":
         path =  args.dataset_path + "/products/"
         vertices_num = 2449029
         edges_num = 123718280
@@ -46,7 +46,7 @@ def Run(args):
         train_set_num = 196615
         valid_set_num = 39323
         test_set_num = 2213091
-    elif args.dataset == "PA":
+    elif args.dataset_name == "paper100m":
         path = args.dataset_path + "/paper100M/"
         vertices_num = 111059956
         edges_num = 1615685872
@@ -54,7 +54,7 @@ def Run(args):
         train_set_num = 11105995
         valid_set_num = 100000
         test_set_num = 100000
-    elif args.dataset == "CO":
+    elif args.dataset_name == "com-friendster":
         path = args.dataset_path + "/com-friendster/"
         vertices_num = 65608366
         edges_num = 1806067135
@@ -62,7 +62,7 @@ def Run(args):
         train_set_num = 6560836
         valid_set_num = 100000
         test_set_num = 100000
-    elif args.dataset == "UKS":
+    elif args.dataset_name == "ukunion":
         path = args.dataset_path + "/ukunion/"
         vertices_num = 133633040
         edges_num = 5507679822
@@ -70,7 +70,7 @@ def Run(args):
         train_set_num = 13363304
         valid_set_num = 100000
         test_set_num = 100000
-    elif args.dataset == "UKL":
+    elif args.dataset_name == "uk2014":
         path = args.dataset_path + "/uk2014/"
         vertices_num = 787801471
         edges_num = 47284178505
@@ -78,7 +78,7 @@ def Run(args):
         train_set_num = 78780147
         valid_set_num = 100000
         test_set_num = 100000
-    elif args.dataset == "CL":
+    elif args.dataset_name == "clueweb":
         path = args.dataset_path + "/clueweb/"
         vertices_num = 955207488
         edges_num = 42574107469
@@ -88,7 +88,8 @@ def Run(args):
         test_set_num = 100000
     else:
         print("invalid dataset path")
-        return
+        exit
+    
 
     with open("meta_config","w") as file:
         file.write("{} {} {} {} {} {} {} {} {} {}".format(path, args.train_batch_size, vertices_num, edges_num, features_dim, train_set_num, valid_set_num, test_set_num, args.cache_memory, args.epoch))
@@ -114,7 +115,7 @@ if __name__ == "__main__":
 
     argparser = argparse.ArgumentParser("Legion Server.")
     argparser.add_argument('--dataset_path', type=str, default="/share/gnn_data")
-    argparser.add_argument('--dataset', type=str, default="PA")
+    argparser.add_argument('--dataset_name', type=str, default="ukunion")
     argparser.add_argument('--train_batch_size', type=int, default=8000)
     argparser.add_argument('--fanout', type=list, default=[25, 10])
     argparser.add_argument('--gpu_number', type=int, default=2)

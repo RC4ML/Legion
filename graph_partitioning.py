@@ -1,6 +1,9 @@
 import subprocess
 import re
 import networkx as nx
+import os
+import sys
+import argparse 
 
 def parse_topo_output(output):
     """
@@ -34,11 +37,94 @@ def find_largest_fully_connected_group(G):
     return max_size, max_cliques
 
 if __name__ == "__main__":
+    
+    cur_path = sys.path[0]
+    argparser = argparse.ArgumentParser("Graph Partitioning.")
+    argparser.add_argument('--dataset_path', type=str, default='dataset')
+    argparser.add_argument('--dataset_name', type=str, default='ukunion')
+    argparser.add_argument('--processes_number', type=int, default=4)
+    argparser.add_argument('--gpu_num', type=int, default=2)
+    args = argparser.parse_args()
+    
     connections = get_nvlink_topology()
     G = nx.Graph()
     G.add_edges_from(connections)
     group_size, fully_connected_groups = find_largest_fully_connected_group(G)
+    partition_command = [
+        "mpirun",
+        "-n", "4",
+        "./xtrapulp",
+        args.dataset_name+"_xtraformat",
+        str(int(args.gpu_num/group_size)),
+        "-v", "1.03",
+        "-l"
+    ]
+    print(partition_command)
+    result = subprocess.run(partition_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
-    if fully_connected_groups or group_size == 1:
-        print(f"Largest group size with fully connected GPUs: {group_size}")
-        
+    print("STDOUT:", result.stdout)
+    print("STDERR:", result.stderr)
+    
+    
+    if args.dataset_name == "products":
+        path =  args.dataset_path + "/products/"
+        vertices_num = 2449029
+        edges_num = 123718280
+        features_dim = 100
+        train_set_num = 196615
+        valid_set_num = 39323
+        test_set_num = 2213091
+    elif args.dataset_name == "paper100m":
+        path = args.dataset_path + "/paper100M/"
+        vertices_num = 111059956
+        edges_num = 1615685872
+        features_dim = 128
+        train_set_num = 11105995
+        valid_set_num = 100000
+        test_set_num = 100000
+    elif args.dataset_name == "com-friendster":
+        path = args.dataset_path + "/com-friendster/"
+        vertices_num = 65608366
+        edges_num = 1806067135
+        features_dim = 256
+        train_set_num = 6560836
+        valid_set_num = 100000
+        test_set_num = 100000
+    elif args.dataset_name == "ukunion":
+        path = args.dataset_path + "/ukunion/"
+        vertices_num = 133633040
+        edges_num = 5507679822
+        features_dim = 256
+        train_set_num = 13363304
+        valid_set_num = 100000
+        test_set_num = 100000
+    elif args.dataset_name == "uk2014":
+        path = args.dataset_path + "/uk2014/"
+        vertices_num = 787801471
+        edges_num = 47284178505
+        features_dim = 128
+        train_set_num = 78780147
+        valid_set_num = 100000
+        test_set_num = 100000
+    elif args.dataset_name == "clueweb":
+        path = args.dataset_path + "/clueweb/"
+        vertices_num = 955207488
+        edges_num = 42574107469
+        features_dim = 128
+        train_set_num = 95520748
+        valid_set_num = 100000
+        test_set_num = 100000
+    else:
+        print("invalid dataset path")
+        exit
+    
+    convert_command = [
+        "./xtra_part_to_bin",
+        "xtrapulp/"+args.dataset_name+"_xtraformat.parts."+str(int(args.gpu_num/group_size)),
+        str(vertices_num)
+    ]
+    print(convert_command)
+    result2 = subprocess.run(convert_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    
+    print("STDOUT:", result2.stdout)
+    print("STDERR:", result2.stderr)

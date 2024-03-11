@@ -1,16 +1,5 @@
 # This file elaborates more on dataset preparing
 
-## Datasets Statistics
-
-| Datasets | PR | PA | CO | UKS | UKL | CL |
-| --- | --- | --- | --- | --- | --- | --- |
-| #Vertices | 2.4M | 111M | 65M | 133M | 0.79B | 1B |
-| #Edges | 120M | 1.6B | 1.8B | 5.5B | 47.2B | 42.5B |
-| Feature Size | 100 | 128 | 256 | 256 | 128 | 128 |
-| Topology Storage | 640MB | 6.4GB | 7.2GB | 22GB | 189GB | 170GB |
-| Feature Storage | 960MB | 56GB | 65GB | 136GB | 400GB | 512GB |
-| Class Number | 47 | 2 | 2 | 2 | 2 | 2 |
-
 ## Legion Format
 Take uk-union as an example
 ```

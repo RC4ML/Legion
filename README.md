@@ -42,7 +42,7 @@ $ pip3 install  dgl -f https://data.dgl.ai/wheels/cu1xx/repo.html
 8. MPI-3.1
 
 
-## 3. Prepare Datasets
+## 3. Prepare Datasets and Graph Partitioning
 Datasets are from OGB (https://ogb.stanford.edu/), Standford-snap (https://snap.stanford.edu/), and Webgraph (https://webgraph.di.unimi.it/).
 Here is an example of preparing datasets for Legion.
 
@@ -50,6 +50,12 @@ Here is an example of preparing datasets for Legion.
 Refer to README in dataset directory for more instructions
 ```
 $ bash prepare_datasets.sh
+```
+
+### Partition Uk-Union
+gpu_num represents all gpu numbers you want to use, Legion will partition the graph according to underlying NVlink topology
+```
+$ python graph_partitioning.py --dataset_name 'ukunion' --gpu_num 2
 ```
 
 ## 4. Build Legion from Source
@@ -67,7 +73,7 @@ $ modprobe msr
 ### Step 2. Start Legion Server
 
 ```
-$ python legion_server.py
+$ python legion_server.py --dataset_path 'dataset' --dataset_name ukunion --train_batch_size 8000 --fanout [25,10] --gpu_number 2 --epoch 2 --cache_memory 38000000 
 ```
 
 ### Step 3. Run Legion Training
