@@ -202,7 +202,7 @@ if __name__ == "__main__":
     argparser.add_argument('--nbrs_num', type=list, default=[25, 10])
     argparser.add_argument('--drop_rate', type=float, default=0.5)
     argparser.add_argument('--learning_rate', type=float, default=0.003)
-    argparser.add_argument('--epoch', type=int, default=1)
+    argparser.add_argument('--epoch', type=int, default=2)
     argparser.add_argument('--gpu_num', type=int, default=2)
     args = argparser.parse_args()
 

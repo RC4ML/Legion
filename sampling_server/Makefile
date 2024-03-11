@@ -44,7 +44,7 @@ bin: core
 	$(NVCXX) $(NVCXXFLAGS) \
 		-L /usr/local/cuda/lib64 -L $(BUILD_DIR)/lib \
 		$(CORE_OBJ) \
-		-lcudart -lpthread -lpcm\
+		-lcudart -lpthread \
 		-o $(BIN_DIR)/sampling_server -lrt
 
 

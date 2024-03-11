@@ -306,7 +306,7 @@ void UnifiedCache::Initialize(
         CacheController* cctl = NewPreSCCacheController(train_step, device_count_);
         cache_controller_[i] = cctl;
     }
-    std::cout<<"Cache Controler Initialize\n";
+    // std::cout<<"Cache Controler Initialize\n";
 
     if(float_feature_len > 0){
         float_feature_cache_.resize(device_count_);
@@ -358,7 +358,7 @@ void UnifiedCache::FindTopo(
 
 
 void UnifiedCache::CandidateSelection(int cache_agg_mode, FeatureStorage* feature, GraphStorage* graph){
-    std::cout<<"Start selecting cache candidates\n";
+    // std::cout<<"Start selecting cache candidates\n";
     std::vector<unsigned long long int*> node_access_time;
     std::vector<unsigned long long int*> edge_access_time;
     for(int32_t i = 0; i < device_count_; i++){
@@ -391,7 +391,7 @@ void UnifiedCache::CandidateSelection(int cache_agg_mode, FeatureStorage* featur
     Kc_ = Kc;
     Kg_ = Kg;
 
-    std::cout<<"NVLink Clique: "<<Kc<<" GPU Per Clique: "<<Kg<<std::endl;
+    // std::cout<<"NVLink Clique: "<<Kc<<" GPU Per Clique: "<<Kg<<std::endl;
 
     int32_t total_num_nodes = feature->TotalNodeNum();
     total_num_nodes_ = total_num_nodes;
@@ -449,7 +449,7 @@ void UnifiedCache::CostModel(int cache_agg_mode, FeatureStorage* feature, GraphS
     float* cpu_float_feature = feature->GetAllFloatFeature();
     int32_t float_feature_len = feature->GetFloatFeatureLen();
     int64_t* csr_index = graph->GetCSRNodeIndexCPU();
-    std::cout<<"Start solve cost model"<<std::endl;
+    // std::cout<<"Start solve cost model"<<std::endl;
     for(int32_t i = 0; i < Kc_; i++){
 
         cudaSetDevice(i*Kg_);
@@ -543,10 +543,10 @@ void UnifiedCache::CostModel(int cache_agg_mode, FeatureStorage* feature, GraphS
             // std::cout<<trans_of_total[sidx]<<std::endl;
         }
         int max_sidx = std::max_element(trans_of_total.begin(),trans_of_total.end()) - trans_of_total.begin(); 
-        std::cout<<"Alpha: "<<(max_sidx * MIN_INTERVAL)<<" Transactions: "<<trans_of_total[max_sidx]<<std::endl;
+        std::cout<<"Alpha: "<<(max_sidx * MIN_INTERVAL)<<" Transactions: "<<trans_of_total[max_sidx]<<" on Clique: "<<i<<std::endl;
         node_capacity_.push_back(cap_of_feat[steps - 1 - max_sidx] + 1);//capacity of each GPU
         edge_capacity_.push_back(cap_of_topo[max_sidx] + 1);   
-        std::cout<<"Feat capacity "<<cap_of_feat[steps-1-max_sidx]<<" topo capacity "<<cap_of_topo[max_sidx]<<std::endl;
+        std::cout<<"Feat capacity: "<<cap_of_feat[steps-1-max_sidx]<<" Topo capacity: "<<cap_of_topo[max_sidx]<<" on Clique: "<<i<<std::endl;
     }
 }
 
@@ -601,13 +601,13 @@ void UnifiedCache::FillUp(int cache_agg_mode, FeatureStorage* feature, GraphStor
         }
     }
     cudaDeviceSynchronize();
-    std::cout<<"Finish load feature cache\n";
+    // std::cout<<"Finish load feature cache\n";
 
     for(int32_t i = 0; i < Kc_; i++){
         graph->GraphCache(QT_[i], i, Kg_, edge_capacity_[i]);
     }
     cudaDeviceSynchronize();
-    std::cout<<"Finish load topology cache\n";
+    // std::cout<<"Finish load topology cache\n";
 }
 
 
@@ -615,7 +615,7 @@ void UnifiedCache::HybridInit(FeatureStorage* feature, GraphStorage* graph){//mu
     cudaSetDevice(0);
     cudaHostAlloc(&cpu_float_features_, int64_t(int64_t(cpu_cache_capacity_) * float_feature_len_ * sizeof(float)), cudaHostAllocMapped);
 
-    std::cout<<"Start selecting cache candidates\n";
+    // std::cout<<"Start selecting cache candidates\n";
     std::vector<unsigned long long int*> node_access_time;
     for(int32_t i = 0; i < device_count_; i++){
         node_access_time.push_back(cache_controller_[i]->GetNodeAccessedMap());

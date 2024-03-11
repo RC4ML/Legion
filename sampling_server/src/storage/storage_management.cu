@@ -59,10 +59,6 @@ void StorageManagement::ReadMetaFIle(BuildInfo* info){
         iss >> epoch_;
         std::cout<<"Train epoch:        "<<epoch_<<"\n";
         info->epoch = epoch_;
-        iss >> partition_;
-        std::cout<<"Partition?:         "<<partition_<<"\n";
-        iss >> gpu_cache_capacity_;
-        std::cout<<"Pre-defined GPU Cache Capacity: "<<gpu_cache_capacity_<<"\n";
     }else{
         iss >> dataset_path_;
         std::cout<<"Dataset path:       "<<dataset_path_<<"\n";

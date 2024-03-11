@@ -33,13 +33,13 @@ typedef struct shmStruct_st {
 class CUDAIPCEnv : public IPCEnv {
 public:
   CUDAIPCEnv(int32_t device_count){
-    std::cout<<"start initialize ipc env\n";
+    // std::cout<<"start initialize ipc env\n";
     const char shmName[] = "simpleIPCshm";
     if (sharedMemoryCreate(shmName, sizeof(*shm_), &info_) != 0) {
       printf("Failed to create shared memory slab\n");
       exit(EXIT_FAILURE);
     }
-    std::cout<<"Shared Memory Opened\n";
+    // std::cout<<"Shared Memory Opened\n";
 
     shm_ = (volatile shmStruct *)info_.addr;
     memset((void *)shm_, 0, sizeof(*shm_));

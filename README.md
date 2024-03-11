@@ -59,7 +59,7 @@ $ bash build.sh
 ```
 
 ## 4. Run Legion
-There are two steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM.
+There are three steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM.
 ### Step 1. Open msr by root for PCM
 ```
 $ modprobe msr
@@ -67,12 +67,13 @@ $ modprobe msr
 ### Step 2. Start Legion Server
 
 ```
-$ python sampling_server/python/legion_server.py
+$ python legion_server.py
 ```
+
 ### Step 3. Run Legion Training
 After Legion outputs "System is ready for serving", then start training by: 
 ```
-$ python legion_graphsage.py
+$ python training_backend/legion_graphsage.py
 ```
 I will improve the running process for easier use.
 
