@@ -66,7 +66,7 @@ $ bash build.sh
 ```
 
 ## 4. Run Legion
-There are three steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM.
+There are three steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM. (2024.3.11, to solving PCM bugs for general platforms, I disable PCM for now)
 ### Step 1. Open msr by root for PCM
 ```
 $ modprobe msr
