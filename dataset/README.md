@@ -24,14 +24,15 @@ mkdir ukunion
 cd ukunion
 wget http://data.law.di.unimi.it/webdata/uk-union-2006-06-2007-05/uk-union-2006-06-2007-05-underlying.graph
 wget http://data.law.di.unimi.it/webdata/uk-union-2006-06-2007-05/uk-union-2006-06-2007-05-underlying.properties
-
-# java -cp "lib/*" it.unimi.dsi.webgraph.ArcListASCIIGraph uk-union-2006-06-2007-05-underlying ukunion/ukunion-edgelist.txt
-java -cp "lib/*" it.unimi.dsi.webgraph.ArcListASCIIGraph uk-union ukunion/ukunion-edgelist.txt
+cd ..
+java -cp "lib/*" it.unimi.dsi.webgraph.ArcListASCIIGraph ukunion/uk-union-2006-06-2007-05-underlying ukunion/ukunion-edgelist.txt
 
 mkdir xtrapulp_result
-# Generate legion-format bin including edge_src, edge_dst, and xtrapulp-format data for graph partitioning
+# generate legion-format edge_src edge_dst, and the input of xtrapulp
 g++ gen_legion_xtrapulp_fomat.cpp -o gen_legion_xtrapulp_fomat
 ./gen_legion_xtrapulp_fomat ukunion ukunion-edgelist.txt
+# generate training sets, validation sets, and test sets
+python gen_sets.py --dataset_name ukunion
 
 ```
 
@@ -54,19 +55,12 @@ export MANPATH=${MPI_HOME}/share/man:$MANPATH
 # sudo apt-get install mpich libmpich-dev
 
 ```
-## Partioning using xtrapulp
-refer to https://github.com/luoxiaojian/xtrapulp
-An example of using 4 processes to partition graph into 8 parts:
+## install xtrapulp, refer to https://github.com/luoxiaojian/xtrapulp
 ```
 git clone https://github.com/luoxiaojian/xtrapulp.git
 mv ukunion_xtraformat xtrapulp/
 cd xtrapulp
 make
 make libxtrapulp
-
-mpirun -n 4 ./xtrapulp ukunion_xtraformat 8 -v 1.03 -l
-
-# Convert ukunion_xtraformat.part.8 into legion-format input
-sudo g++ xtra_part_to_bin.cpp -o xtra_part_to_bin
-sudo ./xtra_part_to_bin xtrapulp/ukunion_xtraformat.parts.8 133633040
+cd ../../
 ```
