@@ -6,7 +6,7 @@ Take uk-union as an example
 Edge: uk-union/edge_src,  uk-union/edge_dst ## These are topology files in CSR format. edge_src is int64, edge_dst is int32.
 feature:  uk-union/features ## size = number of vertices x feature size
 label: uk-union/labels ## size = number of vertices
-partition:  uk-union/partition_x ## partition_id for each vertex; x represents the partition number, i.e., NVLink clique number; size = number of vertices
+partition:  uk-union/partition ## partition_id for each vertex
 ```
 ## Customize your datasets
 ```

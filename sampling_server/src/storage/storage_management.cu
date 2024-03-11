@@ -141,7 +141,7 @@ void StorageManagement::LoadFeature(BuildInfo* info){
     std::string labels_path = dataset_path_ + "labels";
     // std::string labels_path = dataset_path_ + "labels_raw";
 
-    std::string partition_path = dataset_path_ + "partition_" + std::to_string(partition_count);
+    std::string partition_path = dataset_path_ + "partition";
 
     std::vector<int32_t> training_ids;
     training_ids.resize(training_set_num_);
@@ -182,7 +182,7 @@ void StorageManagement::LoadFeature(BuildInfo* info){
             trainingset_count ++ ;
         }
     }
-    // std::cout<<"training set count "<<trainingset_count<<"\n";
+    std::cout<<"training set count "<<trainingset_count<<"\n";
 
     for(int32_t i = 0; i < validation_set_num_; i++){
         int32_t tid = validation_ids[i];

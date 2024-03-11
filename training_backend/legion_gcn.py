@@ -156,9 +156,6 @@ def worker_process(rank, world_size, args):
     torch.cuda.set_device(cuda_device)
     ipc_service.initialize()
     train_steps, valid_steps, test_steps = ipc_service.get_steps()
-    batch_size = (args.train_batch_size)
-    hop1 = (args.nbrs_num)[0]
-    hop2 = (args.nbrs_num)[1]
 
     feat_len = args.features_num
 
@@ -225,17 +222,16 @@ if __name__ == "__main__":
     cur_path = sys.path[0]
     argparser = argparse.ArgumentParser("Train GNN.")
     argparser.add_argument('--class_num', type=int, default=2)
-    argparser.add_argument('--features_num', type=int, default=1024)
-    argparser.add_argument('--train_batch_size', type=int, default=8000)
+    argparser.add_argument('--features_num', type=int, default=128)
     argparser.add_argument('--hidden_dim', type=int, default=256)
     argparser.add_argument('--hops_num', type=int, default=2)
     argparser.add_argument('--nbrs_num', type=list, default=[25, 10])
     argparser.add_argument('--drop_rate', type=float, default=0.5)
     argparser.add_argument('--learning_rate', type=float, default=0.003)
-    argparser.add_argument('--epoch', type=int, default=100)
-    argparser.add_argument('--gpu_num', type=int, default=1)
+    argparser.add_argument('--epoch', type=int, default=2)
+    argparser.add_argument('--gpu_number', type=int, default=2)
     args = argparser.parse_args()
 
-    world_size = args.gpu_num
+    world_size = args.gpu_number
 
     run_distribute(worker_process, world_size, args)

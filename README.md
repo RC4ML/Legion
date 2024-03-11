@@ -23,7 +23,7 @@ Legion's software is light-weighted and portable. Here we list some tested envir
 
 2. CUDA 11.7
 
-3. GCC/G++ 9.4.0+
+3. GCC/G++ 11.4.0
 
 4. OS: Ubuntu(other linux systems are ok)
 
@@ -54,6 +54,7 @@ $ bash prepare_datasets.sh
 
 ### Partition Uk-Union
 gpu_num represents all gpu numbers you want to use, Legion will partition the graph according to underlying NVlink topology
+Note that this step would consume a large volume of CPU memory.
 ```
 $ python graph_partitioning.py --dataset_name 'ukunion' --gpu_num 2
 ```
@@ -79,9 +80,9 @@ $ python legion_server.py --dataset_path 'dataset' --dataset_name ukunion --trai
 ### Step 3. Run Legion Training
 After Legion outputs "System is ready for serving", then start training by: 
 ```
-$ python training_backend/legion_graphsage.py
+$ python training_backend/legion_graphsage.py --class_num 2  --features_num 128 --hidden_dim 256 --hops_num 2 --gpu_number 2 --epoch 2
 ```
-I will improve the running process for easier use.
+I will continusly work on this to improve the running process for easier use.
 
 ## Cite this work
 If you use it in your paper, please cite our work

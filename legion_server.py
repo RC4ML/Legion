@@ -114,7 +114,7 @@ def Run(args):
 if __name__ == "__main__":
 
     argparser = argparse.ArgumentParser("Legion Server.")
-    argparser.add_argument('--dataset_path', type=str, default="/share/gnn_data")
+    argparser.add_argument('--dataset_path', type=str, default="./dataset")
     argparser.add_argument('--dataset_name', type=str, default="ukunion")
     argparser.add_argument('--train_batch_size', type=int, default=8000)
     argparser.add_argument('--fanout', type=list, default=[25, 10])

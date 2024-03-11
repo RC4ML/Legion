@@ -156,8 +156,8 @@ int main(int argc, char *argv[])
     // cout<<"lines: "<<lines<<endl;
 
     cout<<"starting writing:"<<endl;
-    std::string data_edge_src_name = file_dir + "/" + file_dir + "_edge_src" ;
-    std::string data_edge_dst_name = file_dir + "/" + file_dir + "_edge_dst" ;
+    std::string data_edge_src_name = file_dir + "/" + "edge_src" ;
+    std::string data_edge_dst_name = file_dir + "/" + "edge_dst" ;
     std::string data_xtraformat_name = file_dir + "_xtraformat" ;
 
     ofstream out_indptr(data_edge_src_name);

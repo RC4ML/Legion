@@ -4,6 +4,8 @@ import networkx as nx
 import os
 import sys
 import argparse 
+import pandas as pd
+import numpy as np
 
 def parse_topo_output(output):
     """
@@ -45,25 +47,6 @@ if __name__ == "__main__":
     argparser.add_argument('--processes_number', type=int, default=4)
     argparser.add_argument('--gpu_num', type=int, default=2)
     args = argparser.parse_args()
-    
-    connections = get_nvlink_topology()
-    G = nx.Graph()
-    G.add_edges_from(connections)
-    group_size, fully_connected_groups = find_largest_fully_connected_group(G)
-    partition_command = [
-        "mpirun",
-        "-n", "4",
-        "./xtrapulp",
-        args.dataset_name+"_xtraformat",
-        str(int(args.gpu_num/group_size)),
-        "-v", "1.03",
-        "-l"
-    ]
-    print(partition_command)
-    result = subprocess.run(partition_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
-    print("STDOUT:", result.stdout)
-    print("STDERR:", result.stderr)
     
     
     if args.dataset_name == "products":
@@ -116,15 +99,41 @@ if __name__ == "__main__":
         test_set_num = 100000
     else:
         print("invalid dataset path")
-        exit
+        exit    
     
-    convert_command = [
-        "./xtra_part_to_bin",
-        "xtrapulp/"+args.dataset_name+"_xtraformat.parts."+str(int(args.gpu_num/group_size)),
-        str(vertices_num)
-    ]
-    print(convert_command)
-    result2 = subprocess.run(convert_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    connections = get_nvlink_topology()
+    G = nx.Graph()
+    G.add_edges_from(connections)
+    group_size, fully_connected_groups = find_largest_fully_connected_group(G)
+    if int(args.gpu_num/group_size) > 1:
+        partition_command = [
+            "mpirun",
+            "-n", "4",
+            "./dataset/xtrapulp/xtrapulp",
+            "./dataset/xtrapulp/" + args.dataset_name+"_xtraformat",
+            str(int(args.gpu_num/group_size)),
+            "-v", "1.03",
+            "-l"
+        ]
+        print(partition_command)
+        result = subprocess.run(partition_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+        
+        file_path = "./dataset/xtrapulp/"+args.dataset_name+"_xtraformat.parts."+str(int(args.gpu_num/group_size))
+        df = pd.read_csv(file_path, header=None, delimiter="\s+")
+        data = df.to_numpy()
+        data = data.astype(np.int32)
+        data.tofile('partition')
+        # print(data)
+
+        move_command = [
+            "mv",
+            "partition",
+            "./dataset/"+args.dataset_name+"/"
+        ]
+        print(move_command)
+        result2 = subprocess.run(move_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)     
+        print("STDERR:", result2.stderr)
     
-    print("STDOUT:", result2.stdout)
-    print("STDERR:", result2.stderr)
