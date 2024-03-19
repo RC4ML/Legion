@@ -46,17 +46,17 @@ $ pip3 install  dgl -f https://data.dgl.ai/wheels/cu1xx/repo.html
 Datasets are from OGB (https://ogb.stanford.edu/), Standford-snap (https://snap.stanford.edu/), and Webgraph (https://webgraph.di.unimi.it/).
 Here is an example of preparing datasets for Legion.
 
-### Uk-Union Datasets
+### Paper100m dataset
 Refer to README in dataset directory for more instructions
 ```
 $ bash prepare_datasets.sh
 ```
 
-### Partition Uk-Union
+### Partition paper100m
 gpu_num represents all gpu numbers you want to use, Legion will partition the graph according to underlying NVlink topology
 Note that this step would consume a large volume of CPU memory.
 ```
-$ python graph_partitioning.py --dataset_name 'ukunion' --gpu_num 2
+$ python graph_partitioning.py --dataset_name 'paper100m' --gpu_num 2
 ```
 
 ## 4. Build Legion from Source
@@ -65,7 +65,7 @@ $ python graph_partitioning.py --dataset_name 'ukunion' --gpu_num 2
 $ bash build.sh
 ```
 
-## 4. Run Legion
+## 4. Run Legion, Start from training Graphsage on paper100m
 There are three steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM. (2024.3.11, to solve PCM bugs for general platforms, I disable PCM for now)
 ### Step 1. Open msr by root for PCM
 ```
@@ -82,6 +82,10 @@ After Legion outputs "System is ready for serving", then start training by:
 ```
 $ python training_backend/legion_graphsage.py --class_num 172  --features_num 128 --hidden_dim 256 --hops_num 2 --gpu_number 2 --epoch 2
 ```
+The training backend will output like this:
+
+<img width="464" alt="100a4006d37d398d2db7ece4edaae97" src="https://github.com/RC4ML/Legion/assets/109936863/1ae401ef-297f-4c88-864a-fe7f8496d973">
+
 I will continuously work on this to improve the running process for easier use.
 
 ## Cite this work
