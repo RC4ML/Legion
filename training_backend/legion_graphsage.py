@@ -191,7 +191,7 @@ def run_distribute(dist_fn, world_size, args):
 if __name__ == "__main__":
     cur_path = sys.path[0]
     argparser = argparse.ArgumentParser("Train GNN.")
-    argparser.add_argument('--class_num', type=int, default=2)
+    argparser.add_argument('--class_num', type=int, default=172)
     argparser.add_argument('--features_num', type=int, default=128)
     argparser.add_argument('--hidden_dim', type=int, default=256)
     argparser.add_argument('--hops_num', type=int, default=2)

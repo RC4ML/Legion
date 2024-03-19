@@ -159,9 +159,9 @@ void StorageManagement::LoadFeature(BuildInfo* info){
     mmap_trainingset_read(testing_path, testing_ids);
     if(in_memory_mode_){
         cudaHostAlloc(&host_float_feature, int64_t(int64_t(int64_t(node_num) * nf) * sizeof(float)), cudaHostAllocMapped);
-        // mmap_features_read(features_path, host_float_feature);
+        mmap_features_read(features_path, host_float_feature);
     }
-    // mmap_labels_read(labels_path, all_labels);
+    mmap_labels_read(labels_path, all_labels);
 
     int32_t fdret = mmap_partition_read(partition_path, partition_index);
 

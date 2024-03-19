@@ -51,9 +51,9 @@ def Run(args):
         vertices_num = 111059956
         edges_num = 1615685872
         features_dim = 128
-        train_set_num = 11105995
-        valid_set_num = 100000
-        test_set_num = 100000
+        train_set_num = 1207179  
+        valid_set_num = 125265
+        test_set_num = 214338
     elif args.dataset_name == "com-friendster":
         path = args.dataset_path + "/com-friendster/"
         vertices_num = 65608366
