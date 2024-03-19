@@ -47,7 +47,7 @@ Datasets are from OGB (https://ogb.stanford.edu/), Standford-snap (https://snap.
 Here is an example of preparing datasets for Legion.
 
 ### Paper100m dataset
-Refer to README in dataset directory for more instructions
+Refer to README in dataset directory for customizing webgraphs
 ```
 $ bash prepare_dataset_eva.sh
 ```
@@ -65,7 +65,7 @@ $ python graph_partitioning.py --dataset_name 'paper100m' --gpu_num 2
 $ bash build.sh
 ```
 
-## 4. Run Legion, Start from training Graphsage on paper100m
+## 5. Run Legion, Start from training Graphsage on paper100m
 There are three steps to train a GNN model in Legion. In these steps, you need to change to **root** user for PCM. (2024.3.11, to solve PCM bugs for general platforms, I disable PCM for now)
 ### Step 1. Open msr by root for PCM
 ```
