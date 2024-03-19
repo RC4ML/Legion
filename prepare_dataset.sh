@@ -39,8 +39,8 @@ python gen_sets.py --dataset_name ukunion
 
 # # install xtrapulp, refer to https://github.com/luoxiaojian/xtrapulp
 git clone https://github.com/luoxiaojian/xtrapulp.git
-mv ukunion_xtraformat xtrapulp/
 cd xtrapulp
 make
 make libxtrapulp
 cd ../../
+mv ukunion_xtraformat xtrapulp/

@@ -4,7 +4,7 @@ dataset/xtrapulp
 dataset/xtrapulp_result
 dataset/gen_legion_xtrapulp_fomat
 dataset/dataset
-dataset/paper100M
+dataset/paper100m
 sampling_server/build
 training_backend/build
 training_backend/dist

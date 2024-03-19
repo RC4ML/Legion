@@ -2,22 +2,22 @@ from ogb.nodeproppred import NodePropPredDataset
 import numpy as np
 from scipy.sparse import coo_matrix
 
-dataset = NodePropPredDataset(name = 'ogbn-arxiv')
+dataset = NodePropPredDataset(name = 'ogbn-papers100M')
 
 split_idx = dataset.get_idx_split()
 train_idx, valid_idx, test_idx = split_idx["train"], split_idx["valid"], split_idx["test"]
 graph, label = dataset[0] # graph: library-agnostic graph object
 
 trainset = train_idx.astype(np.int32)
-trainset.tofile('./paper100M/'+'trainingset')
+trainset.tofile('./paper100m/'+'trainingset')
 validset = valid_idx.astype(np.int32)
-validset.tofile('./paper100M/'+'validationset')
+validset.tofile('./paper100m/'+'validationset')
 testset = test_idx.astype(np.int32)
-testset.tofile('./paper100M/'+'testingset')
+testset.tofile('./paper100m/'+'testingset')
 labels = label.astype(np.int32)
-labels.tofile('./paper100M/'+'labels')
+labels.tofile('./paper100m/'+'labels')
 features = graph['node_feat'].astype(np.float32)
-features.tofile('./paper100M/'+'features')
+features.tofile('./paper100m/'+'features')
 
 
 # Edge index in COO format
@@ -32,9 +32,9 @@ csr = coo.tocsr()
 
 # Get the CSR row and col arrays
 edge_src = (csr.indptr).astype(np.int64)
-edge_src.tofile('./paper100M/'+'edge_src')
+edge_src.tofile('./paper100m/'+'edge_src')
 edge_dst = (csr.indices).astype(np.int32)
-edge_dst.tofile('./paper100M/'+'edge_dst')
+edge_dst.tofile('./paper100m/'+'edge_dst')
 
 xtraformat = np.array(edge_index.T.flatten().tolist())
 xtraformat = xtraformat.astype(np.int32)

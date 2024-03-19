@@ -47,7 +47,7 @@ def Run(args):
         valid_set_num = 39323
         test_set_num = 2213091
     elif args.dataset_name == "paper100m":
-        path = args.dataset_path + "/paper100M/"
+        path = args.dataset_path + "/paper100m/"
         vertices_num = 111059956
         edges_num = 1615685872
         features_dim = 128
