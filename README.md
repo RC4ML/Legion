@@ -49,7 +49,7 @@ Here is an example of preparing datasets for Legion.
 ### Paper100m dataset
 Refer to README in dataset directory for more instructions
 ```
-$ bash prepare_datasets.sh
+$ bash prepare_dataset_eva.sh
 ```
 
 ### Partition paper100m

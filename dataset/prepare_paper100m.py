@@ -2,7 +2,7 @@ from ogb.nodeproppred import NodePropPredDataset
 import numpy as np
 from scipy.sparse import coo_matrix
 
-dataset = NodePropPredDataset(name = 'ogbn-papers100M')
+dataset = NodePropPredDataset(name = 'ogbn-arxiv')
 
 split_idx = dataset.get_idx_split()
 train_idx, valid_idx, test_idx = split_idx["train"], split_idx["valid"], split_idx["test"]
@@ -35,4 +35,8 @@ edge_src = (csr.indptr).astype(np.int64)
 edge_src.tofile('./paper100M/'+'edge_src')
 edge_dst = (csr.indices).astype(np.int32)
 edge_dst.tofile('./paper100M/'+'edge_dst')
+
+xtraformat = np.array(edge_index.T.flatten().tolist())
+xtraformat = xtraformat.astype(np.int32)
+xtraformat.tofile('./xtrapulp/paper100m_xtraformat')
 
