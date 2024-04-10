@@ -52,6 +52,12 @@ Refer to README in dataset directory for customizing webgraphs
 $ bash prepare_dataset_eva.sh
 ```
 
+### Products dataset
+Refer to README in dataset directory for customizing webgraphs
+```
+$ bash prepare_dataset_eva_products.sh
+```
+
 ### Partition paper100m
 gpu_num represents all gpu numbers you want to use, Legion will partition the graph according to underlying NVlink topology
 Note that this step would consume a large volume of CPU memory.
@@ -72,13 +78,19 @@ There are three steps to train a GNN model in Legion. In these steps, you need t
 $ modprobe msr
 ```
 ### Step 2. Start Legion Server
-
+**Paper100M**
 ```
 $ python legion_server.py --dataset_path 'dataset' --dataset_name paper100m --train_batch_size 8000 --fanout [25,10] --gpu_number 2 --epoch 2 --cache_memory 38000000 
 ```
 
+**Products**
+```
+python legion_server.py --dataset_path 'dataset' --dataset_name products --train_batch_size 800 --fanout [25,10] --gpu_number 1 --epoch 2 --cache_memory 38000000
+```
+
 ### Step 3. Run Legion Training
 After Legion outputs "System is ready for serving", then start training by: 
+**Paper100M**
 ```
 $ python training_backend/legion_graphsage.py --class_num 172  --features_num 128 --hidden_dim 256 --hops_num 2 --gpu_number 2 --epoch 2
 ```
@@ -86,6 +98,10 @@ The training backend will output like this:
 
 <img width="464" alt="100a4006d37d398d2db7ece4edaae97" src="https://github.com/RC4ML/Legion/assets/109936863/1ae401ef-297f-4c88-864a-fe7f8496d973">
 
+**Products**
+```
+python training_backend/legion_graphsage.py --class_num 47  --features_num 100 --hidden_dim 128 --hops_num 2 --gpu_number 1 --epoch 2
+```
 I will continuously work on this to improve the running process for easier use.
 
 ## Cite this work

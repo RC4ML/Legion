@@ -107,7 +107,14 @@ def Run(args):
     else:
         cache_agg_mode = 0
 
-    os.system("./sampling_server/build/bin/sampling_server {} {}".format(gpu_number, cache_agg_mode))
+    # get the current file path
+    current_file_path = os.path.abspath(__file__)
+
+    # get the Legion_home path
+    Legion_home = os.path.dirname(current_file_path)
+
+    server_path = os.path.join(Legion_home, "sampling_server/build/bin/sampling_server {} {}").format(gpu_number, cache_agg_mode)
+    os.system(server_path)
     ## TODO, integrate Legion server in python module
 
 
