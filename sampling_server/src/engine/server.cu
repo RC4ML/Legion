@@ -310,7 +310,7 @@ public:
         
         for(int i = 0; i < op_num_; i++){
             if(i % INTRABATCH_CON >= 1){
-                cudaStreamWaitEvent(streams_[0], events_[i / INTRABATCH_CON * INTRABATCH_CON], 0);
+                cudaStreamWaitEvent(streams_[i / INTRABATCH_CON], events_[i / INTRABATCH_CON * INTRABATCH_CON], 0);
             }
             op_params_[i]->is_presc = false;
             op_factory_[i]->run(op_params_[i]);
